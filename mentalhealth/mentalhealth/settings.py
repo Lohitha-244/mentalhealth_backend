@@ -6,7 +6,9 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load .env once
-load_dotenv(BASE_DIR / ".env")
+load_dotenv(dotenv_path=BASE_DIR / ".env", override=True)
+print("ENV FILE PATH:", BASE_DIR / ".env")
+print("DEBUG GEMINI:", repr(os.getenv("GEMINI_API_KEY")))
 
 # =========================
 # BASIC SETTINGS
@@ -168,12 +170,13 @@ else:
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_TIMEOUT = 20
-
 # =========================
 # AI KEYS
 # =========================
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+print("DEBUG GEMINI:", os.getenv("GEMINI_API_KEY"))
 
-
+# Trigger dev server reload to pick up final 2026 .env (v4)
